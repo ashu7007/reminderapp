@@ -1,41 +1,40 @@
-import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import React from "react";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-import ReminderComponent from "./ReminderComponent";
+// import ReminderComponent from "./ReminderComponent";
 
-// function App() {
-//   return (
-//     <div> <h1>Hello</h1> </div>
-//   ); }
+// // function App() {
+// //   return (
+// //     <div> <h1>Hello</h1> </div>
+// //   ); }
 
-class ShowReminders extends React.Component {
+// class ShowReminders extends React.Component {
   
-  show = () =>{
-    // this.state.reminderData.map((ele,index) => {
-    // console.log(ele);
-    console.log(this.props.rem);
-    return <ReminderComponent  data={this.props.rem} ></ReminderComponent>;
+//   show = () =>{
+//     // this.state.reminderData.map((ele,index) => {
+//     // console.log(ele);
+//     return <ReminderComponent  data={this.props.rem} ></ReminderComponent>;
 
-        };
+//         };
         
-  render() {
+//   render() {
     
-    return (
-    <div className={this.props.color}>
-        <h1 className="mx-4">{this.props.title}</h1>
-        <div style={{height:300, overflow: "auto"}} >
-        {this.show()}
+//     return (
+//     <div className={this.props.color}>
+//         <h1 className="mx-4">{this.props.title}</h1>
+//         <div style={{height:300, overflow: "auto"}} >
+//         {this.show()}
             
-            {/* <ReminderComponent></ReminderComponent>
-            <ReminderComponent></ReminderComponent>
-            <ReminderComponent></ReminderComponent>
-            <ReminderComponent></ReminderComponent>
-            <ReminderComponent></ReminderComponent> */}
-        </div>
+//             {/* <ReminderComponent></ReminderComponent>
+//             <ReminderComponent></ReminderComponent>
+//             <ReminderComponent></ReminderComponent>
+//             <ReminderComponent></ReminderComponent>
+//             <ReminderComponent></ReminderComponent> */}
+//         </div>
         
-    </div>
-    );
-  }
-}
+//     </div>
+//     );
+//   }
+// }
 
-export default ShowReminders;
+// export default ShowReminders;
