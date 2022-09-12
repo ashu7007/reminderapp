@@ -2,14 +2,10 @@ import React, {useState, createContext} from "react";
 import Form from 'react-bootstrap/Form'
 
 
-const CreateForm = (props) => {
+const UpdateForm = (props) => {
   // const [reminderData, setReminderData] = useState([]);
-  const [formData, setFormData] = useState(
-                                          { 
-                                            title:"",
-                                            date:"",
-                                            time:"",}
-                                            );
+  const [formData, setFormData] = useState(props.data);
+  const [reminders, setReminderData] = useState(props.reminders);
   const [formError, setformError] = useState(
                                               { 
                                                 title:"",
@@ -23,8 +19,6 @@ const CreateForm = (props) => {
     console.log(name,value);
     setFormData({...formData,[name]: value});
   }
-
-  const childDataHandler = (data)=>{props.passChild(data)};
 
   const handleSubmit = (event)=> {
     event.preventDefault();
@@ -40,20 +34,16 @@ const CreateForm = (props) => {
       setformError({...formError,time: "time is required"});
        return null;
     }
-    // setReminderData([...reminderData,
-    //   {  
-    //   title:formData.title,
-    //   date:formData.date,
-    //   time:formData.time,
-    //   }
-    // ]
-    // );
-    childDataHandler([...props.data,
-      {  
-      title:formData.title,
-      date:formData.date,
-      time:formData.time,
-      }]);
+    setReminderData(
+        reminders[formData.index]={
+            title:formData.title,
+            date:formData.date,
+            time:formData.time,
+
+        }
+    );
+    props.setdata(reminders);
+    props.toggle();
     setFormData({
         title:null,
         date:null,
@@ -69,7 +59,7 @@ const CreateForm = (props) => {
 };
 var today = new Date();
 var dd = today.getDate();
-var mm = today.getMonth() + 1; //January is 0!
+var mm = today.getMonth() + 1;
 var yyyy = today.getFullYear();
 
 if (dd < 10) {
@@ -87,27 +77,27 @@ today = yyyy + '-' + mm + '-' + dd;
     <h2>{props.heading}</h2>
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label>Title</Form.Label>
-      <Form.Control type="text" name="title" placeholder="Enter Reminder title"
+      <Form.Control type="text" name="title" value={formData.title} placeholder="Enter Reminder title"
       onChange={handleInputChange} />
       <p>{formError.title}</p>
     </Form.Group>
 
     <Form.Group className="mb-3" controlId="formBasicPassword">
       <Form.Label>Date</Form.Label>
-      <Form.Control type="date" min={today} name="date"  onChange={handleInputChange}/>
+      <Form.Control type="date" min={today} name="date" value={formData.date}  onChange={handleInputChange}/>
       <p>{formError.date}</p>
     </Form.Group>
 
     <Form.Group className="mb-3" controlId="formBasicPassword">
       <Form.Label>Time</Form.Label>
-      <Form.Control type="time"   name="time"  onChange={handleInputChange} />
+      <Form.Control type="time" value={formData.time}  name="time"  onChange={handleInputChange} />
       <p>{formError.time}</p>
     </Form.Group>      
     <button type="submit" className="d-grid gap-2 btn btn-warning">
-      Create
+      Update
     </button>
   </Form>
 );
 }
 
-export default CreateForm;
+export default UpdateForm;

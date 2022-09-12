@@ -5,13 +5,17 @@ import CreateForm from "./components/CreateReminderFun";
 
 const App = () =>{
   const [reminders, setReminders] = useState([]);
+  const [formData, setFormData] = useState(
+    { 
+      title:"",
+      date:"",
+      time:"",}
+      );
   const [index, setIndex] = useState(null);
 
   const getUpComingTask = (tasks)=>{
     var d1=new Date(tasks.date);
     var d2 = new Date();
-    console.log(d1);
-    console.log(d2);
     if(d2<d1){
       return tasks
     }
@@ -21,8 +25,6 @@ const App = () =>{
   const getPastTask = (tasks)=>{
     var d1=new Date(tasks.date);
     var d2 = new Date();
-    console.log(d1);
-    console.log(d2);
     if(d2>d1){
       return tasks
     }
@@ -38,15 +40,16 @@ const App = () =>{
       <hr></hr>
     </div>
     
-    <div className='col-5'>
-      <CreateForm passChild={setReminders} />
+    <div className='col-5 border-3 border-warning '>
+      <CreateForm passChild={setReminders} heading="Create Reminder" data={reminders}/>
     </div>
     <div className='col-7'>
       <div className='row'>
-        <ShowReminders passChild={setIndex} data={reminders.filter(getUpComingTask)} title="Up-coming Reminders" color="m-4 border border-warning"/>
+        <ShowReminders isShow={true} formData={setFormData} passChild={setReminders} data={reminders.filter(getUpComingTask)} 
+        title="Up-coming Reminders" color="m-4 border border-3 border-warning"/>
         </div>
       <div className='row'>
-        <ShowReminders passChild={setIndex} data={reminders.filter(getPastTask)} title="Past Reminders" color="m-4 border border-danger"/>
+        <ShowReminders isShow={false} passChild={setReminders} data={reminders.filter(getPastTask)} title="Past Reminders" color="m-4 border border-3 border-danger"/>
         </div>
       
       
@@ -76,8 +79,6 @@ class App1 extends React.Component {
   getUpComingTask = (tasks)=>{
     var d1=new Date(tasks.date);
     var d2 = new Date();
-    console.log(d1);
-    console.log(d2);
     if(d2<d1){
       return tasks
     }
@@ -87,8 +88,6 @@ class App1 extends React.Component {
   getPastTask = (tasks)=>{
     var d1=new Date(tasks.date);
     var d2 = new Date();
-    console.log(d1);
-    console.log(d2);
     if(d2>d1){
       return tasks
     }
