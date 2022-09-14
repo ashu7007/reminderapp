@@ -11,12 +11,31 @@ const App = () =>{
       date:"",
       time:"",}
       );
-  const [index, setIndex] = useState(null);
 
+
+ 
   const getUpComingTask = (tasks)=>{
     var d1=new Date(tasks.date);
+    
     var d2 = new Date();
-    if(d2<d1){
+    var hours = d2.getHours();
+    var minutes = d2.getMinutes();
+    console.log(d1);
+    console.log(d2);
+    console.log(d2.getDate()==d1.getDate());
+    var time = tasks.time.split(':')
+    var hours2 = parseInt(time[0]);
+    var minutes2 = parseInt(time[1]);
+    console.log(hours2,minutes2);
+    if(d2.getDate()==d1.getDate() && hours<hours2)
+        {return tasks}
+    else if (d2.getDate()==d1.getDate() && hours===hours2){
+      if(minutes<minutes2)
+        {console.log(hours2,minutes2);
+          return tasks
+        }
+    }
+    else if(d2.getDate()<d1.getDate() ){
       return tasks
     }
 
@@ -25,12 +44,30 @@ const App = () =>{
   const getPastTask = (tasks)=>{
     var d1=new Date(tasks.date);
     var d2 = new Date();
-    if(d2>d1){
+    var hours = d2.getHours();
+    var minutes = d2.getMinutes();
+    var time = tasks.time.split(':')
+    var hours2 = parseInt(time[0]);
+    var minutes2 = parseInt(time[1]);
+    if(d2.getDate()==d1.getDate() && hours>hours2)
+        {return tasks}
+    else if (d2.getDate()==d1.getDate() && hours===hours2){
+      if(minutes>minutes2)
+        {console.log(hours2,minutes2);
+          return tasks
+        }
+    }
+    else if(d2.getDate()>d1.getDate() ){
       return tasks
     }
 
   }
 
+  setInterval(function(){ 
+    reminders.filter(getPastTask);
+    reminders.filter(getUpComingTask);
+
+    }, 5000);
   
   return(
 
